@@ -69,8 +69,8 @@ Celem projektu jest stworzenie bezpiecznej aplikacji internetowej umożliwiając
 
 1.  **Sklonuj repozytorium projektu:**
     ```bash
-    git clone [ADRES_REPOZYTORIUM]
-    cd [NAZWA_FOLDERU_PROJEKTU]
+    git clone https://github.com/cienkowd/secure-microblog.git
+    cd secure-microblog
     ```
 
 2.  **Utwórz plik `.env` na podstawie `.env.example` i skonfiguruj zmienne środowiskowe.**
@@ -81,23 +81,21 @@ Celem projektu jest stworzenie bezpiecznej aplikacji internetowej umożliwiając
     nano .env
     ```
 
-3.  **Uruchom aplikację za pomocą Docker Compose:**
+3.  **Wygeneruj certyfikat TLS dla Nginx** (instrukcja w [`certs/README.md`](certs/README.md)).
+
+4.  **Uruchom aplikację za pomocą Docker Compose:**
     ```bash
     docker-compose up --build
     ```
-    Lub użyj skryptu `run-docker.sh`:
-    ```bash
-    sh run-docker.sh
-    ```
 
-4.  **Aplikacja będzie dostępna pod adresem `https://localhost`** (przekierowanie z `http://localhost` jest automatyczne).
+5.  **Aplikacja będzie dostępna pod adresem `https://localhost`** (przekierowanie z `http://localhost` jest automatyczne).
 
 ### Uruchomienie w środowisku deweloperskim (bez Dockera)
 
 1.  **Sklonuj repozytorium projektu:**
     ```bash
-    git clone [ADRES_REPOZYTORIUM]
-    cd [NAZWA_FOLDERU_PROJEKTU]
+    git clone https://github.com/cienkowd/secure-microblog.git
+    cd secure-microblog
     ```
 
 2.  **Utwórz i aktywuj środowisko wirtualne:**
@@ -111,7 +109,6 @@ Celem projektu jest stworzenie bezpiecznej aplikacji internetowej umożliwiając
     ```bash
     pip install -r requirements.txt
     ```
-    *(Plik `requirements.txt` należy wygenerować poleceniem `pip freeze > requirements.txt` w aktywnym środowisku wirtualnym po zainstalowaniu wymaganych pakietów.)*
 
 4.  **Utwórz plik `.env` na podstawie `.env.example` i skonfiguruj zmienne środowiskowe.**
 
