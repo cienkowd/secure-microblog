@@ -2,165 +2,138 @@
 
 > Microblog with TOTP 2FA, account lockout, rate limiting, CSP and HMAC-signed posts.
 
-## Opis projektu
+A web application for publishing short public messages whose authorship can be verified. The focus of the project is security: protecting user accounts and defending against common web attacks.
 
-Celem projektu jest stworzenie bezpiecznej aplikacji internetowej umożliwiającej użytkownikom publikowanie krótkich wiadomości publicznych z możliwością weryfikacji autorstwa. Aplikacja kładzie duży nacisk na bezpieczeństwo danych użytkowników oraz ochronę przed typowymi atakami internetowymi.
+## Tech stack
 
-## Technologie użyte
+**Backend**
+- Python 3, Flask
+- Flask-SQLAlchemy (ORM), Flask-Migrate / Alembic (migrations)
+- Flask-WTF (forms, CSRF protection)
+- Flask-Bcrypt (password hashing)
+- Flask-Login (sessions)
+- Flask-Mail (password reset and new-device e-mails)
+- Flask-Limiter (rate limiting)
+- PyOTP (TOTP two-factor authentication)
+- Markdown + Bleach (message formatting and HTML sanitization)
+- python-dotenv (configuration)
 
-*   **Backend:**
-    *   Python 3
-    *   Flask - mikroframework webowy
-    *   Flask-SQLAlchemy - ORM dla baz danych SQL
-    *   Flask-Migrate - migracje bazy danych
-    *   Flask-WTF - obsługa formularzy i ochrona CSRF
-    *   Flask-Bcrypt - haszowanie haseł
-    *   Flask-Login - zarządzanie sesjami użytkowników
-    *   Flask-Mail - obsługa wysyłki e-maili
-    *   Flask-Limiter - ograniczanie liczby żądań
-    *   PyOTP - obsługa TOTP (Two-Factor Authentication)
-    *   Alembic - narzędzie do migracji bazy danych
-    *   Markdown - formatowanie wiadomości
-    *   Bleach - sanityzacja HTML
-    *   dotenv - zarządzanie zmiennymi środowiskowymi
-    *   Docker, Docker Compose - konteneryzacja aplikacji
-*   **Frontend:**
-    *   HTML5, CSS3
-*   **Serwer WWW i Proxy:**
-    *   Nginx
+**Frontend:** HTML5, CSS3
 
-## Funkcjonalności aplikacji
+**Infrastructure:** Nginx (TLS termination, reverse proxy), Docker, Docker Compose
 
-*   **Bezpieczeństwo konta użytkownika:**
-    *   Rejestracja i logowanie użytkowników.
-    *   Autentykacja dwuetapowa (2FA) z wykorzystaniem TOTP.
-    *   Wymuszanie silnych haseł podczas rejestracji i zmiany hasła.
-    *   Blokada konta po przekroczeniu limitu nieudanych prób logowania.
-    *   Ograniczenie liczby prób logowania na minutę (rate limiting).
-    *   Opóźnienie odpowiedzi serwera podczas logowania, aby utrudnić ataki brute-force.
-    *   Monitorowanie logowania z nowych urządzeń i powiadomienia e-mail.
-    *   Możliwość zmiany hasła z dodatkowym potwierdzeniem 2FA.
-    *   Mechanizm resetowania hasła z wykorzystaniem tokenów ważnych czasowo.
-*   **Publikowanie i weryfikacja wiadomości:**
-    *   Publikowanie wiadomości z prostym formatowaniem Markdown.
-    *   Podpisywanie wiadomości algorytmem HMAC-SHA256, co umożliwia weryfikację autorstwa.
-    *   Wyświetlanie statusu weryfikacji podpisu wiadomości.
-    *   Strona profilu użytkownika z listą jego publicznych wiadomości.
-    *   Publiczne profile użytkowników dostępne dla wszystkich zalogowanych użytkowników.
-*   **Ochrona przed atakami:**
-    *   Ochrona przed CSRF (Cross-Site Request Forgery) dzięki Flask-WTF.
-    *   Sanityzacja treści wiadomości przed wyświetleniem (ochrona przed XSS) za pomocą Bleach.
-    *   Zabezpieczenia Content-Security-Policy (CSP) w nagłówkach HTTP.
-    *   Wyłączenie nagłówka `Server` w Nginx.
-    *   Honeypot fields w formularzach w celu ochrony przed botami.
-    *   Walidacja wszystkich danych wejściowych po stronie serwera.
-*   **Konteneryzacja:**
-    *   Aplikacja spakowana w kontener Docker.
-    *   Konfiguracja Docker Compose ułatwiająca uruchomienie aplikacji wraz z bazą danych i serwerem Nginx.
+## Features
 
-## Wymagania
+**Account security**
+- Registration and login
+- Two-factor authentication (TOTP)
+- Strong password policy on registration and password change
+- Account lockout after too many failed login attempts (per IP)
+- Login rate limiting (5 attempts per minute)
+- Delayed server response on failed login to slow down brute-force attacks
+- New-device login detection with e-mail notification
+- Password change confirmed with 2FA
+- Password reset with time-limited tokens
 
-*   Docker i Docker Compose zainstalowane na systemie.
-*   Python 3.x (zalecane dla środowiska deweloperskiego, ale Docker izoluje aplikację).
+**Publishing and verifying messages**
+- Messages with basic Markdown formatting
+- Messages signed with HMAC-SHA256 using a per-user secret key, so authorship can be verified
+- Signature verification status shown next to each message
+- User profile page with the user's public messages
+- Public profiles visible to all logged-in users
 
-## Uruchomienie aplikacji
+**Protection against attacks**
+- CSRF protection (Flask-WTF)
+- Message content sanitized before rendering (XSS protection, Bleach)
+- Content-Security-Policy headers
+- Nginx version header disabled (`server_tokens off`)
+- Honeypot fields in forms against bots
+- Server-side validation of all input
 
-### Uruchomienie za pomocą Docker Compose (zalecane)
+**Deployment**
+- Application packaged as a Docker image
+- Docker Compose setup running the app behind Nginx with HTTPS
 
-1.  **Sklonuj repozytorium projektu:**
+## Requirements
+
+- Docker and Docker Compose
+- Python 3.x (for local development without Docker)
+
+## Running
+
+### With Docker Compose (recommended)
+
+1. **Clone the repository:**
     ```bash
     git clone https://github.com/cienkowd/secure-microblog.git
     cd secure-microblog
     ```
 
-2.  **Utwórz plik `.env` na podstawie `.env.example` i skonfiguruj zmienne środowiskowe.**
-
+2. **Create `.env` from `.env.example` and fill in the values** (`SECRET_KEY`, database URI, mail server credentials):
     ```bash
     cp .env.example .env
-    # Edytuj plik .env i wprowadź odpowiednie wartości, np. SECRET_KEY, dane bazy danych, dane serwera poczty e-mail.
-    nano .env
     ```
 
-3.  **Wygeneruj certyfikat TLS dla Nginx** (instrukcja w [`certs/README.md`](certs/README.md)).
+3. **Generate a TLS certificate for Nginx** (see [`certs/README.md`](certs/README.md)).
 
-4.  **Uruchom aplikację za pomocą Docker Compose:**
+4. **Start the application:**
     ```bash
     docker-compose up --build
     ```
 
-5.  **Aplikacja będzie dostępna pod adresem `https://localhost`** (przekierowanie z `http://localhost` jest automatyczne).
+5. **Open `https://localhost`** (`http://localhost` redirects to HTTPS).
 
-### Uruchomienie w środowisku deweloperskim (bez Dockera)
+### Local development (without Docker)
 
-1.  **Sklonuj repozytorium projektu:**
-    ```bash
-    git clone https://github.com/cienkowd/secure-microblog.git
-    cd secure-microblog
-    ```
+1. **Clone the repository** (as above).
 
-2.  **Utwórz i aktywuj środowisko wirtualne:**
+2. **Create and activate a virtual environment:**
     ```bash
     python3 -m venv .venv
     source .venv/bin/activate  # Linux/macOS
-    .venv\Scripts\activate  # Windows
+    .venv\Scripts\activate     # Windows
     ```
 
-3.  **Zainstaluj zależności z pliku `requirements.txt`:**
+3. **Install dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **Utwórz plik `.env` na podstawie `.env.example` i skonfiguruj zmienne środowiskowe.**
+4. **Create `.env` from `.env.example`** (as above).
 
-    ```bash
-    cp .env.example .env
-    # Edytuj plik .env i wprowadź odpowiednie wartości, np. SECRET_KEY, dane bazy danych, dane serwera poczty e-mail.
-    nano .env
-    ```
-
-5.  **Uruchom migracje bazy danych:**
+5. **Apply database migrations:**
     ```bash
     flask db upgrade
     ```
 
-6.  **Uruchom aplikację Flask:**
+6. **Run the app:**
     ```bash
     flask run
     ```
 
-7.  **Aplikacja będzie dostępna pod adresem `http://127.0.0.1:5000/`**
+7. **Open `http://127.0.0.1:5000/`**
 
-## Konfiguracja
+## Configuration
 
-Konfiguracja aplikacji odbywa się poprzez zmienne środowiskowe zdefiniowane w pliku `.env`. Przykładowe zmienne konfiguracyjne:
+The app is configured with environment variables from `.env`:
 
-*   `SECRET_KEY` - sekretny klucz Flask używany do ochrony przed CSRF i podpisywania sesji.
-*   `SQLALCHEMY_DATABASE_URI` - URI bazy danych SQLAlchemy (np. `sqlite:///site.db` dla SQLite).
-*   `MAIL_SERVER`, `MAIL_PORT`, `MAIL_USE_TLS`, `MAIL_USERNAME`, `MAIL_PASSWORD` - konfiguracja serwera poczty e-mail używanego do resetowania haseł i powiadomień.
+- `SECRET_KEY` – Flask secret key used for sessions and CSRF tokens
+- `SQLALCHEMY_DATABASE_URI` – database URI (e.g. `sqlite:///secure-app.db`)
+- `MAIL_SERVER`, `MAIL_PORT`, `MAIL_USE_TLS`, `MAIL_USERNAME`, `MAIL_PASSWORD` – SMTP server used for password resets and notifications
 
-## Bezpieczeństwo
+## Known limitations
 
-Aplikacja została zaprojektowana z myślą o bezpieczeństwie. Kluczowe aspekty bezpieczeństwa obejmują:
+- The TOTP setup QR code is saved as an image under `app/static/qrcodes/`, which is publicly served. It should be rendered inline (e.g. as a base64 data URI) instead of being written to disk.
+- No automated tests yet.
 
-*   **Bezpieczne przechowywanie haseł:** Użycie `bcrypt` do haszowania haseł.
-*   **Autentykacja dwuetapowa:** Wdrożenie TOTP dla dodatkowej warstwy bezpieczeństwa.
-*   **Ochrona przed atakami brute-force:** Limity prób logowania i blokady IP.
-*   **Ochrona przed XSS i CSRF:** Sanityzacja danych wyjściowych i mechanizmy CSRF.
-*   **HTTPS:** Wymuszone bezpieczne połączenie HTTPS dzięki konfiguracji Nginx.
-*   **Content Security Policy:** Ograniczenie źródeł zasobów dla przeglądarki.
-*   **Honeypots:** Zabezpieczenia przed botami w formularzach.
-*   **Regularne migracje bazy danych:** Utrzymanie aktualności schematu bazy danych.
+## Possible extensions
 
-## Dalszy rozwój
-
-*   Dodanie możliwości edycji i usuwania własnych wiadomości.
-*   Implementacja systemu komentarzy pod wiadomościami.
-*   Rozszerzenie formatowania wiadomości o dodatkowe elementy Markdown.
-*   Dodanie testów jednostkowych i integracyjnych.
-*   Implementacja monitoringu i logowania zdarzeń bezpieczeństwa.
-
-## Autor
-
-Damian Cienkowski
+- Editing and deleting one's own messages
+- Comments under messages
+- More Markdown formatting options
+- Unit and integration tests
+- Security event logging and monitoring
 
 ---
+
+Built as coursework at Applied Computer Science, Warsaw University of Technology. The user interface is in Polish.
