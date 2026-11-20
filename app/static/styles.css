@@ -1,0 +1,953 @@
+/* ========================= */
+/* Styl Ogólny               */
+/* ========================= */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #14171a; /* Czarne tło */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ========================= */
+/* Layout Ekranu             */
+/* ========================= */
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.left-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #14171a; /* Neutralne ciemne tło */
+    color: #1da1f2; /* Twitter Blue */
+    text-align: center;
+}
+
+.left-section .logo-container h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f8fa; /* Jasne tło */
+    color: #14171a;
+}
+
+/* ========================= */
+/* Formularze                */
+/* ========================= */
+form {
+    max-width: 100%; /* Form width */
+    background-color: white; /* Form background */
+    padding: 20px; /* Inside spacing */
+    border-radius: 10px; /* Rounded corners for the form */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+form input[type="text"],
+form input[type="password"],
+form button {
+    width: 100%;
+    padding: 10px 15px; /* Add padding inside inputs */
+    margin-bottom: 15px; /* Space between inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* ========================= */
+/* Przyciski                 */
+/* ========================= */
+.primary-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1da1f2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.primary-button:hover {
+    background-color: #0d8cd7;
+}
+
+.btn-primary {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0d8cd7;
+}
+
+.btn-secondary {
+    background-color: #657786;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #525f6b;
+}
+
+/* ========================= */
+/* Kontener Formularza       */
+/* ========================= */
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.form-container p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* ========================= */
+/* Flashe (Komunikaty)       */
+/* ========================= */
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.flashes li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.flashes .success {
+    background-color: #28a745;
+}
+
+.flashes .danger {
+    background-color: #dc3545;
+}
+
+.flash-messages {
+    margin: 20px 0;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: opacity 0.5s ease; /* Animacja zanikania */
+}
+
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+
+/* ========================= */
+/* Stopka                    */
+/* ========================= */
+footer {
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-top: 1px solid #e1e8ed;
+    font-size: 14px;
+    color: #657786;
+}
+
+/* ========================= */
+/* Modalne Okno              */
+/* ========================= */
+.modal {
+    display: none; /* Ukryj domyślnie */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Ciemne przezroczyste tło */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #000;
+    cursor: pointer;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.modal-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1da1f2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-button:hover {
+    background-color: #0d8cd7;
+}
+
+/* ========================= */
+/* Pasek Boczny              */
+/* ========================= */
+/* Lewy pasek boczny */
+.left-sidebar {
+    width: 25%; /* 1/4 ekranu */
+    background-color: #14171a; /* Ciemne tło */
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1da1f2; /* Twitter Blue */
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    display: block;
+    color: #1da1f2; /* Twitter Blue */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #e8f5fd; /* Jasnoniebieskie podświetlenie */
+}
+
+/* ========================= */
+/* Responsywność             */
+/* ========================= */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .content {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* ========================= */
+/* Karty                     */
+/* ========================= */
+
+/* Przyciski */
+.button-container a {
+    display: block;
+    padding: 15px;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0d8cd7;
+}
+
+.btn-secondary {
+    background-color: #657786;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #525f6b;
+}
+
+/* Kontener logowania */
+.login-container {
+    background-color: #fff;
+    color: #14171a;
+    width: 500px; /* Większa szerokość */
+    border-radius: 25px; /* Zaokrąglenie okna */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Więcej miejsca wewnątrz */
+    text-align: center;
+}
+
+/* Kontener rejestracji */
+.register-container {
+    background-color: #fff;
+    color: #14171a;
+    width: 500px;
+    border-radius: 25px; /* Zaokrąglenie okna */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Więcej miejsca wewnątrz */
+    text-align: center;
+}
+
+/* Główny kontener */
+.main-container {
+    width: 100%;
+    display: flex;
+    height: 100vh;
+    background-color: #f5f8fa; /* Jasne tło */
+    overflow: hidden;
+}
+
+/* Nagłówek */
+.form-header h1 {
+    font-size: 2rem;
+    color: #1da1f2;
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+/* Treść formularza */
+.form-body h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center; /* Wycentrowanie tytułu */
+}
+
+/* Grupowanie elementów formularza */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Ustawienie tekstu etykiety do lewej */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    text-align: left; /* Tekst etykiety wyrównany do prawej */
+}
+
+/* Pola formularza */
+.input-field {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Zaokrąglenie inputów */
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* Przycisk */
+.primary-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1da1f2;
+    color: #fff;
+    border: none;
+    border-radius: 25px; /* Zaokrąglenie przycisku */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.primary-button:hover {
+    background-color: #0d8cd7;
+}
+
+/* Stopka formularza */
+.form-footer {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.form-footer a {
+    color: #1da1f2;
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Główna treść */
+.content {
+    width: 50%; /* 2/4 ekranu */
+    display: flex;
+    flex-direction: column;
+    background-color: #fff; /* Białe tło */
+    overflow-y: auto;
+}
+
+/* Pole do wpisywania wiadomości */
+.message-input-container {
+    background-color: #f5f8fa;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.primary-button {
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.primary-button:hover {
+    background-color: #0d8cd7;
+}
+
+/* Lista wiadomości */
+.messages-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+}
+
+.message {
+    background-color: #f5f8fa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #657786;
+    margin-bottom: 10px;
+}
+
+.message-author {
+    font-weight: bold;
+    color: #14171a;
+}
+
+.message-content {
+    font-size: 1rem;
+    color: #14171a;
+}
+
+/* Prawy pasek boczny */
+.right-sidebar {
+    width: 25%; /* 1/4 ekranu */
+    background-color: #14171a; /* Ciemne tło */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Profil użytkownika */
+.profile-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #f5f8fa;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 2px solid #1da1f2;
+    object-fit: cover;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-details h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #1da1f2;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    color: #657786;
+}
+
+/* Lista wiadomości */
+.messages-feed .message {
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #14171a; /* Przyjemne tło */
+}
+
+.auth-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.auth-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.qr-code-container {
+    margin-bottom: 20px;
+}
+
+.qr-code {
+    max-width: 100%;
+    width: 200px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.instruction-text {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+.two-factor-container {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #14171a;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+}
+
+.two-factor-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #1da1f2;
+}
+
+.qr-code-section {
+    margin-bottom: 20px;
+}
+
+.qr-code img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.instructions {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    color: #bbbbbb;
+}
+
+.two-factor-form .form-group {
+    margin-bottom: 15px;
+}
+
+.two-factor-form .input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+.two-factor-form .input-field::placeholder {
+    color: #888;
+}
+
+.two-factor-form .primary-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #1da1f2;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.two-factor-form .primary-button:hover {
+    background-color: #0097a7;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #1e1e2f; /* Kolor tekstu */
+}
+
+/* Opis formularza */
+.form-description {
+    font-size: 0.9rem;
+    color: #555555;
+    margin-bottom: 1.5rem;
+}
+
+/* Kontener dla resetu hasła */
+.reset-password-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #14171a; /* Ciemniejsze tło dla kontrastu */
+}
+
+/* Styl dla formularza resetu hasła */
+.reset-password-form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Grupa elementów formularza */
+.reset-form-group {
+    margin-bottom: 20px;
+}
+
+/* Pole tekstowe */
+.reset-input-field {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.reset-input-field:focus {
+    border-color: #007bff; /* Zmieniono kolor podczas fokusu */
+    outline: none;
+}
+
+.reset-instructions {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reset-instructions h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.reset-instructions p {
+    font-size: 16px;
+    color: #cccccc;
+}
+
+.reset-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.reset-links p {
+    font-size: 14px;
+    color: #cccccc;
+    margin: 5px 0;
+}
+
+.reset-links a {
+    color: #1da1f2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.reset-links a:hover {
+    text-decoration: underline;
+}
+
+/* Kontener na powiadomienia */
+.flash-container {
+    position: fixed;
+    width: 350px;
+    top: 20px;
+    right: 10px;
+    z-index: 1000; /* Powiadomienia nad resztą zawartości */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Pojedyncze powiadomienie */
+.flash-message {
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeOut 5s forwards; /* Automatyczne znikanie po 3 sekundach */
+}
+
+/* Kategorie powiadomień */
+.flash-message.success {
+    background-color: #28a745;
+}
+.flash-message.info {
+    background-color: #17a2b8;
+}
+.flash-message.warning {
+    background-color: #ffc107;
+    color: black;
+}
+.flash-message.danger {
+    background-color: #dc3545;
+}
+
+/* Animacja znikania */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.text-danger {
+    color: #ff4d4d; /* Czerwony kolor tekstu */
+    font-size: 0.9rem; /* Mniejszy rozmiar tekstu */
+    margin-top: 5px; /* Odstęp od pola formularza */
+    display: block; /* Wyświetlanie jako blok, aby zawsze był na nowej linii */
+    font-family: 'Arial', sans-serif; /* Użycie czytelnej czcionki */
+}
+
+.honeypot-field {
+    display: none !important;
+}
+
+.message-verification {
+    margin-top: 10px;
+    text-align: right;
+}
+
+/* Styl dla przycisku weryfikacji */
+.message-verification .verify-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff; /* Niebieski kolor */
+    color: #fff; /* Biały tekst */
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Styl przy najechaniu */
+.message-verification .verify-button:hover {
+    background-color: #0056b3; /* Ciemniejszy niebieski */
+    transform: scale(1.05); /* Delikatne powiększenie */
+}
+
+/* Styl przy aktywacji (kliknięciu) */
+.message-verification .verify-button:active {
+    background-color: #004494; /* Jeszcze ciemniejszy niebieski */
+    transform: scale(0.95); /* Delikatne zmniejszenie */
+}
+
+.secondary-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #6c757d; /* Szary kolor */
+    color: #fff; /* Biały tekst */
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.secondary-button:hover {
+    background-color: #5a6268; /* Ciemniejszy szary */
+    transform: scale(1.05); /* Delikatne powiększenie */
+}
+
+.secondary-button:active {
+    background-color: #545b62; /* Jeszcze ciemniejszy szary */
+    transform: scale(0.95); /* Delikatne zmniejszenie */
+}
+
+.message-signature {
+    font-size: 12px; /* Mniejszy rozmiar tekstu */
+    color: #6c757d; /* Neutralny szary kolor */
+    margin-top: 5px; /* Dodanie niewielkiego odstępu od treści wiadomości */
+    font-style: italic; /* Kursywa dla subtelności */
+    text-align: right; /* Wyrównanie do prawej */
+}
+
+h3 {
+    font-size: 18px; /* Średni rozmiar tekstu */
+    color: #343a40; /* Ciemny neutralny kolor */
+    margin-bottom: 10px; /* Odstęp pod nagłówkiem */
+    font-weight: bold; /* Wyraźny, ale nie przytłaczający */
+    text-align: left; /* Wyrównanie do lewej */
+    border-left: 4px solid #007bff; /* Pasek akcentujący po lewej stronie */
+    padding-left: 8px; /* Odstęp między tekstem a paskiem */
+}
+
+.verified {
+    color: #28a745; /* Zielony kolor dla zweryfikowanych wiadomości */
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.not-verified {
+    color: #dc3545; /* Czerwony kolor dla niezweryfikowanych wiadomości */
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 5px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witaj w Aplikacji</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="welcome-screen">
+    <div class="split-container">
+        <div class="left-section">
+            <div class="logo-container">
+                <h1>X Secure App</h1>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="form-container">
+                <h2>Najbezpieczniejszy sposób na zarządzanie danymi</h2>
+                <p>Dołącz już teraz.</p>
+                <div class="button-container">
+                    <a href="{{ url_for('routes.register') }}" class="btn btn-primary">Utwórz konto</a>
+                    <p class="separator">lub</p>
+                    <p>Masz już konto?</p>
+                    <a href="{{ url_for('routes.login') }}" class="btn btn-secondary">Zaloguj się</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="flash-container" class="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

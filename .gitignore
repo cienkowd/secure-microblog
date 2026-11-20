@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+*.log
+.env
+# local secrets and runtime data
+instance/
+*.db
+certs/*.key
+certs/*.crt
+app/static/qrcodes/*.png
+.idea/

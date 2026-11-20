@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - X Secure App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <aside class="sidebar left-sidebar">
+            <h2 class="sidebar-title">X Secure App</h2>
+            <ul>
+                <li><a href="{{ url_for('routes.home') }}">Strona główna</a></li>
+                <li><a href="{{ url_for('routes.profile') }}" class="active">Profil</a></li>
+                <li><a href="{{ url_for('routes.setup_2fa') }}">Ustawienia 2FA</a></li>
+                <li><a href="{{ url_for('routes.change_password') }}">Zmień hasło</a></li>
+                <li><a href="{{ url_for('routes.logout') }}">Wyloguj się</a></li>
+            </ul>
+        </aside>
+
+        <div class="content">
+            <div class="profile-header">
+                <div class="profile-picture">
+                    <img src="{{ url_for('static', filename='images/' + user.profile_picture) }}" alt="Avatar użytkownika" class="profile-picture">
+                </div>
+                <div class="profile-details">
+                    <h2>{{ user.username }}</h2>
+                    <p>Email: {{ user.email }}</p>
+                    <p>Dołączył: {{ user.created_at.strftime('%d.%m.%Y') }}</p>
+                </div>
+            </div>
+
+            <h3>Twoje wiadomości</h3>
+            <div class="messages-feed">
+                {% for message in messages %}
+                <div class="message">
+                    <div class="message-header">
+                        <span class="message-author">{{ message.user.username }}</span>
+                        <small>{{ message.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+                    </div>
+                    <div class="message-content">
+                        {{ message.render_content()|safe }}
+                    </div>
+                    <div class="message-verification">
+                        {% if message.signature and message.user.verify_signature(message.content, message.signature) %}
+                        <small class="verified">Wiadomość zweryfikowana</small>
+                        {% else %}
+                        <small class="not-verified">Wiadomość niezweryfikowana</small>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <aside class="sidebar right-sidebar"></aside>
+    </div>
+    <div id="flash-container" class="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

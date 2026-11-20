@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ustaw 2FA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <div class="two-factor-container">
+            <h2>Ustaw dwuetapową weryfikację</h2>
+            <div class="qr-code-section">
+                <div class="qr-code">
+                    <img src="{{ url_for('static', filename=qr_code_filename) }}" alt="Kod QR">
+                </div>
+                <p class="instructions">Zeskanuj kod QR w swojej aplikacji uwierzytelniającej.</p>
+            </div>
+            <form method="POST" class="two-factor-form">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.token(class_="input-field", placeholder="Wprowadź kod z aplikacji") }}
+                </div>
+                <div class="form-group honeypot-field">
+                    {{ form.honeypot(class_="input-field") }}
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="primary-button">Zatwierdź</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="flash-container" class="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
