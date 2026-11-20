@@ -1,6 +1,6 @@
 # Secure Microblog
 
-> Microblog with TOTP 2FA, account lockout, rate limiting, CSP and HMAC-signed posts. Flask, SQLAlchemy, Nginx, Docker.
+> Microblog with TOTP 2FA, account lockout, rate limiting, CSP and HMAC-signed posts.
 
 ## Opis projektu
 
